@@ -23,10 +23,10 @@ app.on('ready', function() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 800,
-    height: 600,
-    webPreferences: {
-      nodeIntegration: false
-    }
+    height: 600
+    //webPreferences: {
+    //  nodeIntegration: false
+    //}
   });
 
   // and load the index.html of the app.

@@ -14,4 +14,10 @@ angular.module('energydashApp')
       'AngularJS',
       'Karma'
     ];
+
+    this.doNodeStuff = function () {
+      var filestream = nodeRequire('fs');
+      console.log('hello');
+    };
+
   });
