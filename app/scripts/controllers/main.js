@@ -16,9 +16,12 @@ angular.module('energydashApp')
     ];
 
     this.doNodeStuff = function () {
-      var filestream = nodeRequire('fsadawdkjqwkqwd');
-      filestream.
-      console.log('hello');
+      var filestream = nodeRequire('fs'),
+          filePath = $('#fileIo')[0].files[0].path;
+      console.log(filePath);
+      filestream.readFile(filePath, 'utf8', function (err, data) {
+        console.log(data);
+      });
     };
 
   });
