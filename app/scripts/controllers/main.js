@@ -9,12 +9,7 @@
  */
 angular.module('energydashApp')
   .controller('MainCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-
+    // This is from when I was fucking around earlier
     this.doNodeStuff = function () {
       var filestream = nodeRequire('fs'),
           filePath = $('#fileIo')[0].files[0].path;
