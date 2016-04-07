@@ -4,12 +4,44 @@ $fa-font-path: "../bower_components/components-font-awesome/fonts";
 @import "components-font-awesome/scss/font-awesome.scss";
 // endbower
 
+
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Raleway'), local('Raleway-Regular'), url('../fonts/Raleway-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Raleway Bold'), local('Raleway-Bold'), url('../fonts/Raleway-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Raleway';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Raleway Italic'), local('Raleway-Italic'), url('../fonts/Raleway-Italic.ttf') format('truetype');
+}
+
 $main-color: #006e00;
 
 body {
   padding: 0;
+  font-family: 'Raleway';
   -webkit-app-region: drag;
   height: 100%;
+  background-color: lighten($main-color, 70%);
+}
+
+.graph {
+  background-color: white;
+}
+
+.app-container {
+  padding-top: 50px;
 }
 
 button, .btn, a {
@@ -19,25 +51,37 @@ button, .btn, a {
 
 .navbar, .navbar-brand {
   background-color: $main-color;
-  color: white;
 }
 
 .navbar {
   padding-top: 1.4em;
   border: none;
+  border-radius: 0;
 }
 
 .navbar-default .navbar-nav > .active > a {
-  background-color: lighten($main-color, 5%);
+  background-color: lighten($main-color, 10%);
   color: white;
+  &:hover {
+    background-color: lighten($main-color, 5%);
+    color: white;
+  }
 }
 
 .logo, .navbar-default .navbar-nav > li > a {
   color: white;
+  &:hover {
+    background-color: lighten($main-color, 5%);
+    color: white;
+  }
+
 }
 
 .navbar-default .navbar-brand {
   color: white;
+  &:hover {
+    color: white;
+  }
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */

@@ -12,7 +12,8 @@ angular
   .module('energydashApp', [
     'ngAnimate',
     'ngResource',
-    'ngRoute'
+    'ngRoute',
+    'nvd3'
   ])
   .config(function ($routeProvider) {
     $routeProvider
