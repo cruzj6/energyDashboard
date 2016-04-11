@@ -19,6 +19,8 @@ angular.module('energydashApp')
       'Karma'
     ];
 
+    this.sqftAvg = sqftAvg;
+
     //Get building data from file
     var path = __dirname + '/buildingMapData.json';
     var buildingData = fs.readFileSync(path, 'utf8');
