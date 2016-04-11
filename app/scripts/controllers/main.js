@@ -63,6 +63,6 @@ angular.module('energydashApp')
         { "label" : "G" , "value" : -13.925743130903 },
         { "label" : "H" , "value" : -5.1387322875705 }
       ]
-    }]
+    }];
 
   });
