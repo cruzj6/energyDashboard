@@ -20,12 +20,19 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       // bower:js
-      'bower_components/jquery/dist/jquery.js',
+      'bower_components/jquery/jquery.js',
       'bower_components/angular/angular.js',
       'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js',
       'bower_components/angular-animate/angular-animate.js',
       'bower_components/angular-resource/angular-resource.js',
       'bower_components/angular-route/angular-route.js',
+      'bower_components/EaselJS/lib/easeljs-0.8.2.combined.js',
+      'bower_components/ev-emitter/ev-emitter.js',
+      'bower_components/imagesloaded/imagesloaded.js',
+      'bower_components/qtip2/jquery.qtip.js',
+      'bower_components/qtip2/basic/jquery.qtip.js',
+      'bower_components/angular-qtip2-directive/qtip2.js',
+      'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

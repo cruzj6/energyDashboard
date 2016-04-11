@@ -12,7 +12,9 @@ angular
   .module('energydashApp', [
     'ngAnimate',
     'ngResource',
-    'ngRoute'
+    'ngRoute',
+    'rwdImageMaps',
+    'ui.bootstrap'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -20,6 +22,11 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         controllerAs: 'main'
+      })
+      .when('/witenergymap', {
+        templateUrl: 'views/witenergymap.html',
+        controller: 'WitenergymapCtrl',
+        controllerAs: 'witenergymap'
       })
       .otherwise({
         redirectTo: '/'

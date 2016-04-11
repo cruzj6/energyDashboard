@@ -1,0 +1,134 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   '--save',
+1 verbose cli   'angular-image-maps-rwd' ]
+2 info using npm@2.10.1
+3 info using node@v0.12.4
+4 verbose install initial load of /Users/Joey/witenergy/package.json
+5 verbose installManyTop reading scoped package data from /Users/Joey/witenergy/node_modules/autoprefixer-core/package.json
+6 verbose installManyTop reading scoped package data from /Users/Joey/witenergy/node_modules/fs/package.json
+7 verbose installManyTop reading scoped package data from /Users/Joey/witenergy/node_modules/generator-angular/package.json
+8 verbose installManyTop reading scoped package data from /Users/Joey/witenergy/node_modules/generator-karma/package.json
+9 verbose installManyTop reading scoped package data from /Users/Joey/witenergy/node_modules/grunt/package.json
+10 verbose installManyTop reading scoped package data from /Users/Joey/witenergy/node_modules/grunt-angular-templates/package.json
+11 verbose installManyTop reading scoped package data from /Users/Joey/witenergy/node_modules/grunt-concurrent/package.json
+12 verbose installManyTop reading scoped package data from /Users/Joey/witenergy/node_modules/grunt-contrib-clean/package.json
+13 verbose installManyTop reading scoped package data from /Users/Joey/witenergy/node_modules/grunt-contrib-compass/package.json
+14 verbose installManyTop reading scoped package data from /Users/Joey/witenergy/node_modules/grunt-contrib-concat/package.json
+15 verbose installManyTop reading scoped package data from /Users/Joey/witenergy/node_modules/grunt-contrib-connect/package.json
+16 verbose installManyTop reading scoped package data from /Users/Joey/witenergy/node_modules/grunt-contrib-copy/package.json
+17 verbose installManyTop reading scoped package data from /Users/Joey/witenergy/node_modules/grunt-contrib-cssmin/package.json
+18 verbose installManyTop reading scoped package data from /Users/Joey/witenergy/node_modules/grunt-contrib-htmlmin/package.json
+19 verbose installManyTop reading scoped package data from /Users/Joey/witenergy/node_modules/grunt-contrib-imagemin/package.json
+20 verbose installManyTop reading scoped package data from /Users/Joey/witenergy/node_modules/grunt-contrib-jshint/package.json
+21 verbose installManyTop reading scoped package data from /Users/Joey/witenergy/node_modules/grunt-contrib-uglify/package.json
+22 verbose installManyTop reading scoped package data from /Users/Joey/witenergy/node_modules/grunt-contrib-watch/package.json
+23 verbose installManyTop reading scoped package data from /Users/Joey/witenergy/node_modules/grunt-filerev/package.json
+24 verbose installManyTop reading scoped package data from /Users/Joey/witenergy/node_modules/grunt-google-cdn/package.json
+25 verbose installManyTop reading scoped package data from /Users/Joey/witenergy/node_modules/grunt-jscs/package.json
+26 verbose installManyTop reading scoped package data from /Users/Joey/witenergy/node_modules/grunt-newer/package.json
+27 verbose installManyTop reading scoped package data from /Users/Joey/witenergy/node_modules/grunt-ng-annotate/package.json
+28 verbose installManyTop reading scoped package data from /Users/Joey/witenergy/node_modules/grunt-postcss/package.json
+29 verbose installManyTop reading scoped package data from /Users/Joey/witenergy/node_modules/grunt-svgmin/package.json
+30 verbose installManyTop reading scoped package data from /Users/Joey/witenergy/node_modules/grunt-usemin/package.json
+31 verbose installManyTop reading scoped package data from /Users/Joey/witenergy/node_modules/grunt-wiredep/package.json
+32 verbose installManyTop reading scoped package data from /Users/Joey/witenergy/node_modules/jit-grunt/package.json
+33 verbose installManyTop reading scoped package data from /Users/Joey/witenergy/node_modules/jshint-stylish/package.json
+34 verbose installManyTop reading scoped package data from /Users/Joey/witenergy/node_modules/time-grunt/package.json
+35 info package.json grunt-angular-templates@0.5.9 No license field.
+36 info package.json grunt@0.4.5 No license field.
+37 info package.json grunt-contrib-clean@0.6.0 No license field.
+38 info package.json fs@0.0.2 fs is also the name of a node core module.
+39 info package.json fs@0.0.2 No description
+40 info package.json fs@0.0.2 No repository field.
+41 info package.json grunt-contrib-connect@0.9.0 No license field.
+42 info package.json grunt-contrib-htmlmin@0.4.0 No license field.
+43 info package.json grunt-contrib-cssmin@0.12.3 No license field.
+44 info package.json grunt-contrib-concat@0.5.1 No license field.
+45 info package.json grunt-contrib-uglify@0.7.0 No license field.
+46 info package.json grunt-google-cdn@0.4.3 license should be a valid SPDX license expression
+47 info package.json grunt-contrib-watch@0.6.1 No license field.
+48 info package.json grunt-contrib-copy@0.7.0 No license field.
+49 info package.json grunt-filerev@2.3.1 license should be a valid SPDX license expression
+50 info package.json grunt-svgmin@2.0.1 No license field.
+51 info package.json grunt-wiredep@2.0.0 No license field.
+52 verbose readDependencies loading dependencies from /Users/Joey/witenergy/package.json
+53 silly cache add args [ 'angular-image-maps-rwd', null ]
+54 verbose cache add spec angular-image-maps-rwd
+55 silly cache add parsed spec { raw: 'angular-image-maps-rwd',
+55 silly cache add   scope: null,
+55 silly cache add   name: 'angular-image-maps-rwd',
+55 silly cache add   rawSpec: '',
+55 silly cache add   spec: '*',
+55 silly cache add   type: 'range' }
+56 silly addNamed angular-image-maps-rwd@*
+57 verbose addNamed "*" is a valid semver range for angular-image-maps-rwd
+58 silly addNameRange { name: 'angular-image-maps-rwd', range: '*', hasData: false }
+59 silly mapToRegistry name angular-image-maps-rwd
+60 silly mapToRegistry using default registry
+61 silly mapToRegistry registry https://registry.npmjs.org/
+62 silly mapToRegistry uri https://registry.npmjs.org/angular-image-maps-rwd
+63 verbose addNameRange registry:https://registry.npmjs.org/angular-image-maps-rwd not in flight; fetching
+64 verbose request uri https://registry.npmjs.org/angular-image-maps-rwd
+65 verbose request no auth needed
+66 info attempt registry request try #1 at 11:36:33 AM
+67 verbose request id 255d4b03a0e89f8e
+68 http request GET https://registry.npmjs.org/angular-image-maps-rwd
+69 http 404 https://registry.npmjs.org/angular-image-maps-rwd
+70 verbose headers { 'content-type': 'application/json',
+70 verbose headers   'cache-control': 'max-age=0',
+70 verbose headers   'content-length': '2',
+70 verbose headers   'accept-ranges': 'bytes',
+70 verbose headers   date: 'Fri, 08 Apr 2016 15:36:33 GMT',
+70 verbose headers   via: '1.1 varnish',
+70 verbose headers   age: '0',
+70 verbose headers   connection: 'keep-alive',
+70 verbose headers   'x-served-by': 'cache-iad2125-IAD',
+70 verbose headers   'x-cache': 'MISS',
+70 verbose headers   'x-cache-hits': '0',
+70 verbose headers   'x-timer': 'S1460129793.246630,VS0,VE350',
+70 verbose headers   vary: 'Accept-Encoding' }
+71 silly get cb [ 404,
+71 silly get   { 'content-type': 'application/json',
+71 silly get     'cache-control': 'max-age=0',
+71 silly get     'content-length': '2',
+71 silly get     'accept-ranges': 'bytes',
+71 silly get     date: 'Fri, 08 Apr 2016 15:36:33 GMT',
+71 silly get     via: '1.1 varnish',
+71 silly get     age: '0',
+71 silly get     connection: 'keep-alive',
+71 silly get     'x-served-by': 'cache-iad2125-IAD',
+71 silly get     'x-cache': 'MISS',
+71 silly get     'x-cache-hits': '0',
+71 silly get     'x-timer': 'S1460129793.246630,VS0,VE350',
+71 silly get     vary: 'Accept-Encoding' } ]
+72 verbose stack Error: Registry returned 404 for GET on https://registry.npmjs.org/angular-image-maps-rwd
+72 verbose stack     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:239:14)
+72 verbose stack     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:170:14)
+72 verbose stack     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:368:22)
+72 verbose stack     at Request.emit (events.js:110:17)
+72 verbose stack     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1219:14)
+72 verbose stack     at Request.emit (events.js:129:20)
+72 verbose stack     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1167:12)
+72 verbose stack     at IncomingMessage.emit (events.js:129:20)
+72 verbose stack     at _stream_readable.js:908:16
+72 verbose stack     at process._tickCallback (node.js:355:11)
+73 verbose statusCode 404
+74 verbose pkgid angular-image-maps-rwd
+75 verbose cwd /Users/Joey/witenergy
+76 error Darwin 15.4.0
+77 error argv "node" "/usr/local/bin/npm" "install" "--save" "angular-image-maps-rwd"
+78 error node v0.12.4
+79 error npm  v2.10.1
+80 error code E404
+81 error 404 Registry returned 404 for GET on https://registry.npmjs.org/angular-image-maps-rwd
+81 error 404
+81 error 404 'angular-image-maps-rwd' is not in the npm registry.
+81 error 404 You should bug the author to publish it (or use the name yourself!)
+81 error 404 It was specified as a dependency of 'energydash'
+81 error 404
+81 error 404 Note that you can also install from a
+81 error 404 tarball, folder, http url, or git url.
+82 verbose exit [ 1, true ]
