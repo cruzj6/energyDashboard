@@ -20,7 +20,7 @@ angular.module('energydashApp')
     ];
 
     //TODO: get path from app
-    var path = '/users/joey/witenergy/app/buildingMapData.json';
+    var path = __dirname + '/buildingMapData.json';
     var buildingData = fs.readFileSync(path, 'utf8');
     console.log("Got building data: " + buildingData);
 
@@ -75,7 +75,7 @@ function drawMap(cntrl)
 
   //Create map bitmap
   var map = new Image();
-  map.src = "../app/witmap.jpg";
+  map.src = "images/witmap.jpg";
   var bitmap = new createjs.Bitmap(map);
   stage.addChild(bitmap);
 
