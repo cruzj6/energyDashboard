@@ -19,17 +19,16 @@ angular.module('energydashApp')
       'Karma'
     ];
 
-    //TODO: get path from app
+    //Get building data from file
     var path = __dirname + '/buildingMapData.json';
     var buildingData = fs.readFileSync(path, 'utf8');
     console.log("Got building data: " + buildingData);
-
-    //Turn it to json
     this.buildings = JSON.parse(buildingData).buildings;
 
-    //Click on building
+    //Click on building image map area
     this.buildingClick = function(event, name)
     {
+      //No page refresh
       event.preventDefault();
     };
 
@@ -171,6 +170,8 @@ function getColorForEnergy(energyNumber, buildingId, buildings)
   //Green to red
   var percent = energyPerSqft/ceil;
   console.log(buildingInfo.name + " | " + energyPerSqft + "kwh/sqft | " + (percent * 100) + "% of average");
+
+  //Scale RBG with percentage of the ceiling
   r = parseInt(percent * 255);
   g = parseInt(255 - (percent * 255));
   b = 0;
