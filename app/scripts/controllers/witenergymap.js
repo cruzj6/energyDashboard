@@ -8,47 +8,85 @@
  * Controller of the energydashApp
  *
  */
-
-const sqftAvg = 14.3;
+const sqftAvg = 3;
 var fs = window.nodeRequire("fs");
 angular.module('energydashApp')
-  .controller('WitenergymapCtrl', function () {
+  .controller('WitenergymapCtrl', function ($scope, energyDatabaseService) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
 
-    this.sqftAvg = sqftAvg;
+    var self = this;
+    self.sqftAvg = sqftAvg;
 
     //Get building data from file
     var path = __dirname + '/buildingMapData.json';
     var buildingData = fs.readFileSync(path, 'utf8');
     console.log("Got building data: " + buildingData);
-    this.buildings = JSON.parse(buildingData).buildings;
+    self.buildings = JSON.parse(buildingData).buildings;
 
     //Click on building image map area
-    this.buildingClick = function(event, name)
+    self.buildingClick = function(event, name)
     {
       //No page refresh
       event.preventDefault();
     };
 
+    //When the curEnergyData is changed we need to change everything
+    $scope.$watch(function(){return self.curEnergyData}, function(val)
+    {
+      if(self.curEnergyData) {
+        //Update buildings data to current latest
+        updateLatestForBuildings(self);
+
+        //Re-draw the map
+        drawMap(self);
+      }
+    });
+
     //Initialize the controller
-    init(this);
+    init(self, energyDatabaseService);
+
   });
 
-function init(cntrl) {
+function init(cntrl, energyDatabaseService) {
 
+  //Initialize the energy data for the scope, after login
+  //TODO: TEST CODE JOEY REMOVE
+  energyDatabaseService.logUserIn("joeymc12321@gmail.com", "US4kb5r5EnMy8dn4", function(s)
+  {
+    if(s) {
+      updateScopeEnergyData(cntrl, energyDatabaseService);
+    }
+  });
+}
+
+function updateScopeEnergyData(cntrl, energyDatabaseService)
+{
+  //Get 3 most recent energy datas
+  energyDatabaseService.getEnergyData(3, function (data) {
+    cntrl.curEnergyData = data;
+  });
+}
+
+function updateLatestForBuildings(cntrl)
+{
   //First init the energy usage for each building object
   for(var i=0; i<cntrl.buildings.length; i++)
   {
     var curBuild = cntrl.buildings[i];
-    curBuild.energyUse = PHGetEnergyForBuilding(curBuild.id);
-  }
 
-  //Now draw the map
-  drawMap(cntrl);
+    //0 will be most recent
+    for(var j=0; j< cntrl.curEnergyData[0].length; j++)
+    {
+      if(cntrl.curEnergyData[0][j].buildingid === curBuild.id)
+      {
+        curBuild.energyUse = cntrl.curEnergyData[0][j].energy;
+      }
+    }
+  }
 }
 
 function drawCanvasImage()
@@ -99,7 +137,7 @@ function drawMap(cntrl)
     var polygon = new createjs.Shape();
 
     //TODO: Placeholder energy getter, this will be from service later and colors
-    var color = getColorForEnergy(PHGetEnergyForBuilding(buildingid), buildingid, buildings);
+    var color = getColorForEnergy(getLatestBuildingEnergyData(cntrl, buildingid), buildingid, buildings);
 
     //Begin drawing over the map, start with the fill
     polygon.graphics.beginFill(color);
@@ -137,11 +175,20 @@ function drawMap(cntrl)
   }
 }
 
-function PHGetEnergyForBuilding(id)
+function getLatestBuildingEnergyData(cntrl, id)
 {
-  var energyNum = sqftAvg * 39636;
+  var energyData = cntrl.curEnergyData[0];
+  for(var i=0; i < energyData.length; i++)
+  {
+      var curBuilding = energyData[i];
+      if(curBuilding.buildingid === id)
+      {
+        return curBuilding.energy;
+      }
+  }
 
-  return energyNum;
+  //Missing building
+  return -1;
 }
 // 14.3 per square foot as average
 function getColorForEnergy(energyNumber, buildingId, buildings)

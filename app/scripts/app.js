@@ -14,7 +14,8 @@ angular
     'ngResource',
     'ngRoute',
     'rwdImageMaps',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'firebase'
   ])
   .config(function ($routeProvider) {
     $routeProvider

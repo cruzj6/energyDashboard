@@ -70,10 +70,9 @@ angular.module('energydashApp')
         //Push new building box info to array and
         //build data for box and it's popover
         scope.$parent.buildingBoxes.push({
-            name: buildingInfo.name,
-            id: buildingInfo.id,
-            sqftUsage: parseFloat(buildingInfo.energyUse / buildingInfo.sqft).toFixed(2),
-            sqft: buildingInfo.sqft,
+            //This will bind the angular buildingInfo from the image map to
+            //this item, so we can just update that
+            buildingInfo: buildingInfo,
             left: leftx,
             right: rightx,
             top: topy,
