@@ -54,13 +54,8 @@ angular.module('energydashApp')
 function init(cntrl, energyDatabaseService) {
 
   //Initialize the energy data for the scope, after login
-  //TODO: TEST CODE JOEY REMOVE
-  energyDatabaseService.logUserIn("joeymc12321@gmail.com", "US4kb5r5EnMy8dn4", function(s)
-  {
-    if(s) {
-      updateScopeEnergyData(cntrl, energyDatabaseService);
-    }
-  });
+  updateScopeEnergyData(cntrl, energyDatabaseService);
+
 }
 
 function updateScopeEnergyData(cntrl, energyDatabaseService)
@@ -136,7 +131,7 @@ function drawMap(cntrl)
     var buildingid = buildings[i].id;
     var polygon = new createjs.Shape();
 
-    //TODO: Placeholder energy getter, this will be from service later and colors
+    //Energy getter, this will be from service
     var color = getColorForEnergy(getLatestBuildingEnergyData(cntrl, buildingid), buildingid, buildings);
 
     //Begin drawing over the map, start with the fill
