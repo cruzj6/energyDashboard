@@ -8,6 +8,8 @@
     "angular-resource": "^1.4.0",
     "angular-route": "^1.4.0",
     "components-font-awesome": "^4.5.0",
+    "angular-nvd3": "^1.0.6",
+    "js-xlsx": "^0.8.0",
     "EaselJS": "easeljs#^0.8.2",
     "qtip2": "^2.2.1",
     "angular-qtip2-directive": "^0.1.2",

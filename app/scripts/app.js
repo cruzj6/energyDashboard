@@ -13,6 +13,7 @@ angular
     'ngAnimate',
     'ngResource',
     'ngRoute',
+    'nvd3',
     'rwdImageMaps',
     'ui.bootstrap',
     'firebase'
