@@ -118,3 +118,31 @@ button, .btn, a {
     border-bottom: 0;
   }
 }
+
+.popover-title {
+  font-size: 30px;
+}
+.popover-content {
+  font-size: 24px;
+}
+
+#energyMapDiv{
+  position: relative;
+  left: 0px;
+  top:0px;
+  width: 1586px;
+  height: 975px;
+}
+
+#mapGradientMeter{
+  position:absolute;
+  left: 20px;
+  top: 20px;
+}
+
+#meterCenterLabel{
+  position:absolute;
+  left: 130px;
+  top: 487.5px;
+  background-color: white;
+}

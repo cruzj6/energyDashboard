@@ -1,0 +1,67 @@
+<div class="row">
+  <div class="col-md-8">
+
+    <!--TODO: Loading wheel for when there is no energy data-->
+    <div ng-if="!witenergymap.curEnergyData">
+      <i class="fa fa-spinner fa-4x" aria-hidden="true"></i>
+    </div>
+
+    <!--This is the block for the map, which is done with precise px coords, so we zoom it out to scale-->
+  <div style="zoom: 45%">
+    <div ng-init="buildingBoxes = []">
+      <canvas id="mapCanvas" width="1586" height="975"></canvas>
+      <div ng-if="witenergymap.curEnergyData" id="energyMapDiv" class="pull-left">
+        <img src="" class="rwdimgmap" id="mapImage"
+             usemap="#campusImgMap" alt="campMap">
+        <map id="campusImgMap" name="campusImgMap">
+          <area mappopup class="ng-binding" alt="" title="" ng-repeat="build in witenergymap.buildings"
+                shape="poly"
+                coords="{{build.polycoords}}"
+                href="#"
+                ng-click="witenergymap.buildingClick($event, build.name)" >
+        </map>
+
+        <!--Boxes for mouseover of buildings-->
+        <div  ng-repeat="box in buildingBoxes"
+              popover-trigger="mouseenter"
+              popover-placement="right"
+              uib-popover="Energy Usage: {{(box.buildingInfo.energyUse / box.buildingInfo.sqft).toFixed(2)}}
+              kwh/sqft | Sqft: {{box.buildingInfo.sqft}}"
+              popover-title="{{box.buildingInfo.name}}"
+              uib-popover-template="buildingpop.html"
+              ng-style="{
+              fontSize: '24px',
+              position: 'absolute',
+              left: box.left + 'px',
+              top: box.top + 'px',
+              width: (box.right - box.left) + 'px',
+              height: (box.bot - box.top) + 'px'}">
+        </div>
+
+        <!--Gradient Meter-->
+        <svg id="mapGradientMeter" height="935" width="100">
+          <defs>
+            <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:rgb(255,0,0);" ></stop>
+              <stop offset="100%" style="stop-color:rgb(0,255,0);" ></stop>
+            </linearGradient>
+          </defs>
+          <rect width="100px" height="1000px" fill="url(#grad1)" ></rect>
+        </svg>
+
+        <h1 id="meterCenterLabel">{{witenergymap.sqftAvg}}</h1>
+      </div>
+
+    </div>
+    </div>
+  </div>
+
+  <!--TODO: Put the charts here!-->
+  <div class="col-md-4">
+    CHARTS GO HERE!
+  </div>
+</div>
+
+
+
+

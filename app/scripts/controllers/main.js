@@ -8,7 +8,7 @@
  * Controller of the energydashApp
  */
 angular.module('energydashApp')
-  .controller('MainCtrl', function (User) {
+  .controller('MainCtrl', function () {
     // This is from when I was fucking around earlier
     //this.doNodeStuff = function () {
     //  var filestream = nodeRequire('fs'),
@@ -18,7 +18,6 @@ angular.module('energydashApp')
     //    console.log(data);
     //  });
     //};
-    this.userFirstName = User.getFirstName();
 
     this.options = {
       chart: {

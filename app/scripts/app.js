@@ -13,7 +13,10 @@ angular
     'ngAnimate',
     'ngResource',
     'ngRoute',
-    'nvd3'
+    'nvd3',
+    'rwdImageMaps',
+    'ui.bootstrap',
+    'firebase'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -21,6 +24,11 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         controllerAs: 'main'
+      })
+      .when('/witenergymap', {
+        templateUrl: 'views/witenergymap.html',
+        controller: 'WitenergymapCtrl',
+        controllerAs: 'witenergymap'
       })
       .otherwise({
         redirectTo: '/'
