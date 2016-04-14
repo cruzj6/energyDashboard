@@ -8,14 +8,15 @@
  * Controller of the energydashApp
  */
 angular.module('energydashApp')
-  .controller('MainCtrl', function (Parser) {
+  .controller('MainCtrl', function (Parser, energyDatabaseService) {
     var filestream = nodeRequire('fs');
 
     this.testFile = function () {
       var filePath = $('#fileIo')[0].files[0].path;
-      filestream.readFile(filePath, 'utf8', function (err, data) {
+      filestream.readFile(filePath, 'base64', function (err, data) {
         var parsedData = Parser.parse(data);
         console.log(parsedData);
+        energyDatabaseService.addDataToRoot(parsedData);
       });
     };
 
