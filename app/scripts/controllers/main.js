@@ -8,16 +8,16 @@
  * Controller of the energydashApp
  */
 angular.module('energydashApp')
-  .controller('MainCtrl', function () {
-    // This is from when I was fucking around earlier
-    //this.doNodeStuff = function () {
-    //  var filestream = nodeRequire('fs'),
-    //      filePath = $('#fileIo')[0].files[0].path;
-    //  console.log(filePath);
-    //  filestream.readFile(filePath, 'utf8', function (err, data) {
-    //    console.log(data);
-    //  });
-    //};
+  .controller('MainCtrl', function (Parser) {
+    var filestream = nodeRequire('fs');
+
+    this.testFile = function () {
+      var filePath = $('#fileIo')[0].files[0].path;
+      filestream.readFile(filePath, 'utf8', function (err, data) {
+        var parsedData = Parser.parse(data);
+        console.log(parsedData);
+      });
+    };
 
     this.options = {
       chart: {
