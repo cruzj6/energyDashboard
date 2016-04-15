@@ -57,6 +57,21 @@ angular.module('energydashApp')
             parsedData.push({ label: data[building].name, value: data[building][attr.toLowerCase()]});
           }
           return parsedData;
+        },
+        line: function (data) {
+          var building, date, series,
+              parsedData = [];
+          for (building in data) {
+            series = { key: data[building].name, values: [] };
+            for (date in data[building].dates) {
+              series.values.push([ new Date(date).getTime(), data[building].dates[date] ]);
+            }
+            series.values.sort(function (a, b) {
+              return a[0] - b[0];
+            });
+            parsedData.push(series);
+          }
+          return parsedData;
         }
       }
     };

@@ -14,7 +14,7 @@ angular.module('energydashApp')
 
     energyDatabaseService.getDataByPath('perBuilding').then(function (data) {
       vm.donutData = Parser.charts.donut(data, 'total');
-      console.log(vm.donutData);
+      vm.lineData = Parser.charts.line(data);
     });
 
     vm.donutOptions = {
@@ -25,10 +25,10 @@ angular.module('energydashApp')
         showLabels: false,
         showLegend: false,
         margin : {
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0
+          top: -30,
+          right: -30,
+          bottom: -30,
+          left: -30
         },
         x: function (d) {
           return d.label;
@@ -38,21 +38,57 @@ angular.module('energydashApp')
         },
         showValues: true,
         transitionDuration: 1000
+      },
+      title: {
+        enable: true,
+        text: 'Energy Consumption Per Building'
       }
     };
 
-    //this.data = [{
-    //  key: "Cumulative Return",
-    //  values: [
-    //    { "label" : "A" , "value" : -29.765957771107 },
-    //    { "label" : "B" , "value" : 0 },
-    //    { "label" : "C" , "value" : 32.807804682612 },
-    //    { "label" : "D" , "value" : 196.45946739256 },
-    //    { "label" : "E" , "value" : 0.19434030906893 },
-    //    { "label" : "F" , "value" : -98.079782601442 },
-    //    { "label" : "G" , "value" : -13.925743130903 },
-    //    { "label" : "H" , "value" : -5.1387322875705 }
-    //  ]
-    //}];
+    vm.lineOptions = {
+      chart: {
+        type: 'stackedAreaChart',
+        height: 500,
+        showLabels: false,
+        showLegend: false,
+        //margin : {
+        //  top: -30,
+        //  right: -30,
+        //  bottom: -30,
+        //  left: -30
+        //},
+        x: function (d) {
+          return d[0];
+        },
+        y: function (d) {
+          return d[1];
+        },
+        useVoronoi: false,
+        //clipEdge: true,
+        duration: 1000,
+        useInteractiveGuideline: true,
+        xAxis: {
+          showMaxMin: false,
+          tickFormat: function(d) {
+            return d3.time.format('%x')(new Date(d))
+          }
+        },
+        yAxis: {
+          showMaxMin: false,
+          tickFormat: function(d){
+            return d;
+          }
+        },
+        zoom: {
+          enabled: true,
+          scaleExtent: [1, 10],
+          useFixedDomain: false,
+          useNiceScale: false,
+          horizontalOff: false,
+          verticalOff: true,
+          unzoomEventType: 'dblclick.zoom'
+        }
+      }
+    }
 
   });
