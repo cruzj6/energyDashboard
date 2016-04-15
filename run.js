@@ -21,8 +21,6 @@ app.on('window-all-closed', function() {
 // initialization and is ready to create browser windows.
 app.on('ready', function() {
 
-
-
   // Create the browser window.
   mainWindow = new BrowserWindow({
     minWidth: 800,
@@ -45,4 +43,8 @@ app.on('ready', function() {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
+
+  mainWindow.on('resize', function () {
+    mainWindow.webContents.send('resized');
+  })
 });

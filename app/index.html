@@ -39,16 +39,16 @@
           <span class="icon-bar"></span>
         </button>
 
-        <a class="navbar-brand logo" href="#/"><i class="fa fa-globe"></i> WIT Energy</a>
+        <a class="navbar-brand logo" href="#/dashboard"><i class="fa fa-globe"></i> WIT Energy</a>
       </div>
 
       <div class="collapse navbar-collapse" id="js-navbar-collapse">
 
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="#/main"><i class="fa fa-bar-chart"></i> Dashboard</a></li>
-          <li><a href="#/witenergymap"><i class="fa fa-map-marker"></i> Map</a></li>
-          <li><a href="#/settings"><i class="fa fa-cogs"></i> Settings</a></li>
-          <li><a href="#/"><i class="fa fa-users"></i> Administration</a></li>
+        <ul ng-controller="NavbarCtrl" class="nav navbar-nav">
+          <li ng-class="{ active: isActiveRoute('dashboard') }"><a href="#/main"><i class="fa fa-bar-chart"></i> Dashboard</a></li>
+          <li ng-class="{ active: isActiveRoute('map') }"><a href="#/witenergymap"><i class="fa fa-map-marker"></i> Map</a></li>
+          <li ng-class="{ active: isActiveRoute('settings') }"><a href="#/settings"><i class="fa fa-cogs"></i> Settings</a></li>
+          <li ng-class="{ active: isActiveRoute('admin') }"><a href="#/admin"><i class="fa fa-users"></i> Administration</a></li>
         </ul>
       </div>
     </div>
@@ -97,6 +97,8 @@
 <script src="scripts/directives/mappopup.js"></script>
 <script src="scripts/services/energydatabaseservice.js"></script>
 <script src="scripts/controllers/settings.js"></script>
+<script src="scripts/controllers/admin.js"></script>
+<script src="scripts/controllers/navbar.js"></script>
 <!-- endbuild -->
 
 
