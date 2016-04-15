@@ -8,7 +8,7 @@
  * Service in the energydashApp.
  */
 angular.module('energydashApp')
-  .service('energyDatabaseService', function ($firebase, $firebaseObject, $firebaseArray) {
+  .service('energyDatabaseService', function ($q, $firebase, $firebaseObject, $firebaseArray) {
       var fbURL = 'https://boiling-inferno-6354.firebaseio.com';
 
       var fbRef = new Firebase(fbURL);
@@ -68,8 +68,11 @@ angular.module('energydashApp')
         },
 
         getDataByPath: function (childrenRelPath) {
-          var dataRef = fbRef.child(childrenRelPath);
-          return $firebaseObject(dataRef);
+          var deferred = $q.defer();
+          fbRef.child(childrenRelPath).on('value', function (data) {
+            deferred.resolve(data.val())
+          });
+          return deferred.promise;
         },
 
         //Num is the number if entries to get (Most recent)

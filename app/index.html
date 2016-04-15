@@ -47,7 +47,7 @@
         <ul class="nav navbar-nav">
           <li class="active"><a href="#/main"><i class="fa fa-bar-chart"></i> Dashboard</a></li>
           <li><a href="#/witenergymap"><i class="fa fa-map-marker"></i> Map</a></li>
-          <li><a href="#/"><i class="fa fa-cogs"></i> Settings</a></li>
+          <li><a href="#/settings"><i class="fa fa-cogs"></i> Settings</a></li>
           <li><a href="#/"><i class="fa fa-users"></i> Administration</a></li>
         </ul>
       </div>
@@ -61,7 +61,6 @@
 <div ng-view="">
 </div>
 </div>
-
 <!-- build:js(.) scripts/vendor.js -->
 <!-- bower:js -->
 <script src="bower_components/jquery/jquery.js"></script>
@@ -73,6 +72,7 @@
 <script src="bower_components/d3/d3.js"></script>
 <script src="bower_components/nvd3/build/nv.d3.js"></script>
 <script src="bower_components/angular-nvd3/dist/angular-nvd3.js"></script>
+<script src="bower_components/jszip/dist/jszip.js"></script>
 <script src="bower_components/js-xlsx/dist/xlsx.js"></script>
 <script src="bower_components/EaselJS/lib/easeljs-0.8.2.combined.js"></script>
 <script src="bower_components/ev-emitter/ev-emitter.js"></script>
@@ -83,6 +83,7 @@
 <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="bower_components/firebase/firebase.js"></script>
 <script src="bower_components/angularfire/dist/angularfire.js"></script>
+<script src="bower_components/moment/moment.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 
@@ -91,12 +92,12 @@
 <script src="scripts/app.js"></script>
 <script src="scripts/controllers/main.js"></script>
 <script src="scripts/services/parser.js"></script>
-<script src="scripts/controllers/about.js"></script>
 <script src="scripts/services/user.js"></script>
 <script src="scripts/controllers/witenergymap.js"></script>
 <script src="scripts/directives/angular-rwdImageMaps.min.js"></script>
 <script src="scripts/directives/mappopup.js"></script>
 <script src="scripts/services/energydatabaseservice.js"></script>
+<script src="scripts/controllers/settings.js"></script>
 <!-- endbuild -->
 
 
