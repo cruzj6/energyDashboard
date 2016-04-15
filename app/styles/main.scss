@@ -31,7 +31,7 @@ $main-color: #006e00;
 body {
   padding: 0;
   font-family: 'Raleway';
-  -webkit-app-region: drag;
+  //-webkit-app-region: drag;
   height: 100%;
   background-color: lighten($main-color, 70%);
 }

@@ -19,15 +19,18 @@ angular.module('energydashApp')
       dataPerBuilding.unit = dataLines[1].split(",")[1];
       for (i = 2; i < length; i += 1) {
         splitLine = dataLines[i].split(',');
+        if (splitLine.indexOf('Maximum') !== -1 || splitLine.indexOf('Total') !== -1 || splitLine.indexOf('Minimum') !== -1 || splitLine.indexOf('Average') !== -1) {
+          dataPerBuilding[splitLine[3].toLowerCase()] = Number(splitLine[4]);
+        }
         if (splitLine[0]) {
-          dataPerBuilding.dates[String(new Date(splitLine[0]))] = splitLine[1];
+          dataPerBuilding.dates[String(new Date(splitLine[0]))] = Number(splitLine[1]);
         }
       }
       return dataPerBuilding;
     }
 
     return {
-      parse: function (data) {
+      parseExcel: function (data) {
         var i, parsedBuilding, date, encodedDate,
             buildingsObjMap = {},
             dateObjMap = {},
@@ -44,9 +47,17 @@ angular.module('energydashApp')
             dateObjMap[encodedDate].values.push({ name: parsedBuilding.name, val: parsedBuilding.dates[date] })
           }
         }
-
         return { perDate: dateObjMap, perBuilding: buildingsObjMap };
-
+      },
+      charts: {
+        donut: function (data, attr) {
+          var building,
+              parsedData = [];
+          for (building in data) {
+            parsedData.push({ label: data[building].name, value: data[building][attr.toLowerCase()]});
+          }
+          return parsedData;
+        }
       }
     };
 

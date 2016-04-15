@@ -30,6 +30,11 @@ angular
         controller: 'WitenergymapCtrl',
         controllerAs: 'witenergymap'
       })
+      .when('/settings', {
+        templateUrl: 'views/settings.html',
+        controller: 'SettingsCtrl',
+        controllerAs: 'settings'
+      })
       .otherwise({
         redirectTo: '/'
       });
