@@ -37,6 +37,13 @@ body {
   background-color: white;
 }
 
+.btn-primary {
+  background-color: $main-color;
+  &:hover, &:active {
+    background-color: darken($main-color, 10%);
+  }
+}
+
 .graph {
   background-color: white;
 }
@@ -45,7 +52,7 @@ body {
   //box-shadow: inset 0px 0px 154px -55px rgba(0,0,0,0.75);
   padding-top: .3em;
   border: 1px solid lightgrey;
-  //border-radius: 50px;
+  border-radius: 50px;
   background-color: rgba(white, .7);
 }
 
@@ -68,22 +75,21 @@ button, .btn, a {
   border-radius: 0;
 }
 
-.navbar-default .navbar-nav > .active > a {
-  background-color: lighten($main-color, 10%);
-  color: white;
-  &:hover {
-    background-color: lighten($main-color, 5%);
-    color: white;
-  }
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus {
+  transition: all .25s ease-in-out;
+  background-color: white;//lighten($main-color, 10%);
+  color: $main-color;
 }
 
 .logo, .navbar-default .navbar-nav > li > a {
+  transition: all .25s ease-in-out;
   color: white;
-  &:hover {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  &:hover, &:active {
     background-color: lighten($main-color, 5%);
     color: white;
   }
-
 }
 
 .navbar-default .navbar-brand {

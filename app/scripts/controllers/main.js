@@ -10,11 +10,18 @@
 angular.module('energydashApp')
   .controller('MainCtrl', function (Parser, energyDatabaseService) {
 
-    var vm = this;
+    var vm = this,
+        processEvents = nodeRequire('electron').ipcRenderer;
 
     energyDatabaseService.getDataByPath('perBuilding').then(function (data) {
       vm.donutData = Parser.charts.donut(data, 'total');
       vm.lineData = Parser.charts.line(data);
+    });
+
+    // Redraw graphs when window is resized
+    processEvents.on('resized', function () {
+      vm.lineApi.update();
+      vm.donutApi.update();
     });
 
     vm.donutOptions = {
@@ -88,6 +95,10 @@ angular.module('energydashApp')
           verticalOff: true,
           unzoomEventType: 'dblclick.zoom'
         }
+      },
+      title: {
+        enable: true,
+        text: 'Energy Consumption Over Time'
       }
     }
 

@@ -1,6 +1,7 @@
 <div class="row">
   <div class="col-xs-12">
-    <input type="file" id="fileIo">
-    <button ng-click="settings.loadFile()" class="btn btn-default">Click on me</button>
+    <input type="file" id="fileIo" accept=".xlsx" class="hidden">
+    <label for="fileIo" class="btn btn-primary"><i class="fa fa-upload"></i>&nbsp; Select File</label>
+    <button ng-click="settings.loadFile()" class="btn btn-primary">Click on me</button>
   </div>
 </div>
