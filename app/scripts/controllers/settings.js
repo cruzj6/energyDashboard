@@ -17,7 +17,9 @@ angular.module('energydashApp')
       filestream.readFile(filePath, 'base64', function (err, data) {
         var parsedData = Parser.parseExcel(data);
         console.log(parsedData);
-        energyDatabaseService.addDataToRoot(parsedData);
+        energyDatabaseService.updateData(parsedData).then(function () {
+          console.log('Sweet it worked');
+        });
       });
     };
   });

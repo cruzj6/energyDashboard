@@ -59,12 +59,15 @@ angular.module('energydashApp')
 
         //Add straight data to the db root
         addDataToRoot: function (data) {
-          fbRef.set(data);
+          var deferred = $q.defer();
+          fbRef.set(data, deferred.resolve);
+          return deferred.promise;
         },
 
         pushDataToPath: function (path, data) {
-          var dataRef = fbRef.child(path);
-          dataRef.push(data);
+          var deferred = $q.defer();
+          fbRef.child(path).push(data, deferred.resolve);
+          return deferred.promise;
         },
 
         getDataByPath: function (childrenRelPath) {
@@ -99,6 +102,33 @@ angular.module('energydashApp')
         {
           var energyDataPath = fbRef.child('/energydata');
           $firebaseArray(energyDataPath).$add(energyData);
+        },
+
+        updateData: function (data) {
+          var building,
+              i = 0,
+              deferredArr = [];
+
+          for (building in data.perBuilding) {
+            deferredArr.push($q.defer());
+            deferredArr.push($q.defer());
+            fbRef.child('perBuilding').child(building).update({
+              total: data.perBuilding[building].total,
+              maximum: data.perBuilding[building].maximum,
+              minimum: data.perBuilding[building].minimum,
+              average: data.perBuilding[building].average
+            });
+            fbRef.child('perDate').update(data.perDate, function () {
+              //
+            });
+            fbRef.child('perBuilding').child(building).child('dates').update(data.perBuilding[building].dates, function () {
+              deferredArr[i].resolve(true);
+              i += 1;
+            });
+          }
+          return $q.all(deferredArr.map(function (deferredObj) {
+            return deferredObj.promise;
+          }));
         }
 
       }
