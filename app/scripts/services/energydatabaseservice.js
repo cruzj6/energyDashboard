@@ -129,7 +129,25 @@ angular.module('energydashApp')
           return $q.all(deferredArr.map(function (deferredObj) {
             return deferredObj.promise;
           }));
-        }
+        },
 
+        getUserAuthData: function()
+        {
+          var authData = fbRef.getAuth();
+          return authData? authData : null;
+        },
+
+        getUserSignedIn: function()
+        {
+          var authData = fbRef.getAuth();
+          if(authData)
+          {
+            return true;
+          }
+          else
+          {
+            return false;
+          }
+        }
       }
   });

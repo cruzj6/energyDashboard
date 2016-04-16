@@ -25,7 +25,7 @@
         <div  ng-repeat="box in buildingBoxes"
               popover-trigger="mouseenter"
               popover-placement="right"
-              uib-popover="Energy Usage: {{(box.buildingInfo.energyUse / box.buildingInfo.sqft).toFixed(2)}}
+              uib-popover="Usage: {{(box.buildingInfo.energyUse / box.buildingInfo.sqft).toFixed(2)}}
               kwh/sqft | Sqft: {{box.buildingInfo.sqft}}"
               popover-title="{{box.buildingInfo.name}}"
               uib-popover-template="buildingpop.html"

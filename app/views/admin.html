@@ -1,1 +1,24 @@
 <p>This is the admin view.</p>
+<script type="text/ng-template" id="loginModalTemplate">
+  <div login-modal >
+    <div class="modal-header">User Log In</div>
+    <div id="loginModalBody" class="modal-body">
+      You must log in as an Admin to access this tab...
+      <br>
+      Email <br>
+      <input  uib-popover="Please enter username" popover-placement="top-left"
+             popover-is-open="loginCtrl.isUserReq"
+              popover-is-enabled="loginCtrl.isUserReq"
+              class="form-control" ng-model="loginCtrl.username">
+
+      Password <br>
+      <input type="password" uib-popover="Please enter password" popover-placement="bottom-left"
+             popover-is-enabled="loginCtrl.isPassReq"
+             popover-is-open="loginCtrl.isPassReq" class="form-control"  ng-model="loginCtrl.pass">
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" ng-click="loginCtrl.logIn(loginCtrl.username, loginCtrl.pass)">Log In</button>
+      <button class="btn btn-danger" ng-click="loginCtrl.cancelLogin()">Cancel</button>
+    </div>
+  </div>
+</script>
