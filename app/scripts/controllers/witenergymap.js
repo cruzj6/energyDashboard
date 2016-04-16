@@ -15,6 +15,8 @@ angular.module('energydashApp')
 
     var self = this;
     self.sqftAvg = 3;
+    self.lowestEnergy = 0;
+    self.highestEnergy = 0;
 
     //Get building data from file
     var path = __dirname + '/buildingMapData.json';
@@ -56,9 +58,25 @@ angular.module('energydashApp')
 
     function updateScopeEnergyData(cntrl, energyDatabaseService)
     {
-      //Get 3 most recent energy datas
-      energyDatabaseService.getEnergyData(3, function (data) {
-        cntrl.curEnergyData = data;
+      //Get most recent energy datas
+      energyDatabaseService.getDataByPath('perDate').then(function (data) {
+
+        console.log(JSON.stringify(data));
+        var newestDateData = {date: 0};
+
+        //Now Get the latest
+        for(var key in data)
+        {
+          var curData = data[key];
+
+          if(new Date(curData.date).getTime() > new Date(newestDateData.date).getTime())
+          {
+            newestDateData = curData;
+          }
+        }
+
+        console.log(JSON.stringify(newestDateData));
+        cntrl.curEnergyData = newestDateData.values;
       });
     }
 
@@ -70,14 +88,19 @@ angular.module('energydashApp')
         var curBuild = cntrl.buildings[i];
 
         //0 will be most recent
-        for(var j=0; j< cntrl.curEnergyData[0].length; j++)
+        for(var j=0; j< cntrl.curEnergyData.length; j++)
         {
-          if(cntrl.curEnergyData[0][j].buildingid === curBuild.id)
+          if(window.btoa(cntrl.curEnergyData[j].name) === curBuild.id)
           {
-            curBuild.energyUse = cntrl.curEnergyData[0][j].energy;
+            curBuild.energyUse = cntrl.curEnergyData[j].val;
           }
         }
       }
+
+      //Get new energy minimum and maximum
+      var minMax = computeEnergyMinMax(cntrl.buildings);
+      self.lowestEnergy = minMax.min;
+      self.highestEnergy = minMax.max;
     }
 
     function drawCanvasImage()
@@ -167,20 +190,20 @@ angular.module('energydashApp')
 
     function getLatestBuildingEnergyData(cntrl, id)
     {
-      var energyData = cntrl.curEnergyData[0];
+      var energyData = cntrl.curEnergyData;
       for(var i=0; i < energyData.length; i++)
       {
         var curBuilding = energyData[i];
-        if(curBuilding.buildingid === id)
+        if(window.btoa(curBuilding.name) === id)
         {
-          return curBuilding.energy;
+          return curBuilding.val;
         }
       }
 
       //Missing building
       return -1;
     }
-// 14.3 per square foot as average
+    // 14.3 per square foot as average
     function getColorForEnergy(energyNumber, buildingId, buildings)
     {
       var buildingInfo = {};
@@ -203,11 +226,13 @@ angular.module('energydashApp')
       var b;
 
       //floor of zero energy usage ceiling of double the average
-      var floor = 0;
-      var ceil = 2 * self.sqftAvg;
+      var floor = self.lowestEnergy;
+      var ceil = self.highestEnergy;
+
+      console.log("Floor: " + floor + " Ceil: " + ceil);
 
       //Green to red
-      var percent = energyPerSqft/ceil;
+      var percent = energyPerSqft/(ceil - floor);
 
       //Scale RBG with percentage of the ceiling
       r = parseInt(percent * 255);
@@ -218,7 +243,31 @@ angular.module('energydashApp')
       return "rgba(" + r + "," + g + "," + b + ",0.75)";
     }
 
+    function computeEnergyMinMax(buildingsData)
+    {
+      //Min max per sqft
+      var minMax = {
+        min: 9999,
+        max: 0
+      };
 
+      //Check through each building
+      for(var i=0; i < buildingsData.length; i++)
+      {
+        var curBuild = buildingsData[i];
+        var curBuildPerSqft = curBuild.energyUse/curBuild.sqft;
+        if(curBuildPerSqft > minMax.max)
+        {
+          minMax.max = curBuildPerSqft;
+        }
+        if(curBuild.energyUse < minMax.min)
+        {
+          minMax.min = curBuildPerSqft;
+        }
+      }
+
+      return minMax;
+    }
 
   });
 
