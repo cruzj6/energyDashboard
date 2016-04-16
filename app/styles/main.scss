@@ -155,9 +155,20 @@ button, .btn, a {
   top: 20px;
 }
 
-#meterCenterLabel{
+#meterTopLabel {
   position:absolute;
   left: 130px;
-  top: 487.5px;
-  background-color: white;
+  top: 20px;
+  font-size: 24px;
+  color: white;
+  background-color: $main-color;
+}
+
+#meterBotLabel{
+  position:absolute;
+  left: 130px;
+  top: 915px;
+  font-size: 24px;
+  color: white;
+  background-color: $main-color;
 }
