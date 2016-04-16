@@ -21,11 +21,11 @@ angular.module('energydashApp')
     else
     {
       var modalInstance = $uibModal.open({
-        template: $templateCache.get("loginModalTemplate"),
+        templateUrl: 'views/loginmodal.html',
         keyboard: false,
         backdrop: 'static',
         windowClass: 'modalCenter',
-        controller: 'LoginmodalcontrollerCtrl',
+        controller: 'LoginModalCtrl',
         controllerAs: 'loginCtrl'
       });
     }

@@ -20,7 +20,7 @@ angular.module('energydashApp')
         addUser: function (email, pass, handleUserAdded) {
           fbRef.createUser({
             email: email,
-            password: pass
+            password: pass,
           }, function (err, usrData) {
             var isSuccess;
             if (err) {
@@ -33,7 +33,7 @@ angular.module('energydashApp')
               console.log(email + " added to database with UserId: " + usrData.uid);
               isSuccess = true;
             }
-            handleUserAdded(isSuccess);
+            handleUserAdded(isSuccess, err);
           });
         },
 
@@ -41,7 +41,7 @@ angular.module('energydashApp')
         logUserIn: function (email, pass, handleLogin) {
           fbRef.authWithPassword({
             email: email,
-            password: pass
+            password: pass,
           }, function (err, data) {
             var isSuccess;
             if (err) {
