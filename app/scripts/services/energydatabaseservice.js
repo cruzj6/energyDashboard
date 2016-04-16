@@ -74,7 +74,7 @@ angular.module('energydashApp')
           var deferred = $q.defer();
           fbRef.child(childrenRelPath).on('value', function (data) {
             deferred.resolve(data.val())
-          });
+          }, deferred.reject);
           return deferred.promise;
         },
 

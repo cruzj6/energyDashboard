@@ -12,17 +12,22 @@ angular.module('energydashApp')
 
     function parseSheet(sheet) {
       var i, splitLine,
+        // Split up by lines
         dataLines = sheet.split('\n'),
         length = dataLines.length,
         dataPerBuilding = { name: '', unit: '', dates: {} };
       dataPerBuilding.name = dataLines[0].split(",")[1];
       dataPerBuilding.unit = dataLines[1].split(",")[1];
       for (i = 2; i < length; i += 1) {
+        // Split up each line to grab values
         splitLine = dataLines[i].split(',');
+        // Account for any errors in spacing with totals, maximums, and, minimums
         if (splitLine.indexOf('Maximum') !== -1 || splitLine.indexOf('Total') !== -1 || splitLine.indexOf('Minimum') !== -1 || splitLine.indexOf('Average') !== -1) {
           dataPerBuilding[splitLine[3].toLowerCase()] = Number(splitLine[4]);
         }
+        // Make sure the line isn't blank
         if (splitLine[0]) {
+          // Set the correct data for the date
           dataPerBuilding.dates[String(new Date(splitLine[0]))] = Number(splitLine[1]);
         }
       }

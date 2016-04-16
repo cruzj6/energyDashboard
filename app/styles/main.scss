@@ -37,10 +37,28 @@ body {
   background-color: white;
 }
 
+.btn {
+  transition: all .25s ease-in-out;
+}
+
+.file-input-control {
+  display: inline-block;
+}
+
 .btn-primary {
   background-color: $main-color;
+  border: 1px solid $main-color;
   &:hover, &:active {
     background-color: darken($main-color, 10%);
+  }
+}
+.btn-default {
+  color: $main-color;
+  background-color: white;
+  border: 1px solid $main-color;
+  &:hover, &:active {
+    background-color: lighten($main-color, 70%);
+    border: 1px solid $main-color;
   }
 }
 
@@ -92,7 +110,7 @@ button, .btn, a {
   }
 }
 
-.navbar-default .navbar-brand {
+.navbar-default .navbar-brand, .navbar-default .navbar-text {
   color: white;
   &:hover {
     color: white;
