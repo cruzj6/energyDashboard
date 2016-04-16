@@ -8,7 +8,7 @@
  * Controller of the energydashApp
  */
 angular.module('energydashApp')
-  .controller('MainCtrl', function (Parser, energyDatabaseService) {
+  .controller('MainCtrl', function ($window, Parser, energyDatabaseService) {
 
     var vm = this,
         processEvents = nodeRequire('electron').ipcRenderer;
@@ -16,6 +16,10 @@ angular.module('energydashApp')
     energyDatabaseService.getDataByPath('perBuilding').then(function (data) {
       vm.donutData = Parser.charts.donut(data, 'total');
       vm.lineData = Parser.charts.line(data);
+    }, function () {
+      var cachedData = JSON.parse($window.localStorage.getItem(('lastSaved')));
+      vm.donutData = Parser.charts.donut(cachedData, 'total');
+      vm.lineData = Parser.charts.line(cachedData);
     });
 
     // Redraw graphs when window is resized

@@ -3,12 +3,12 @@
 <head>
   <script>
     // Gotta rename all of this shit so we can use Node functions
-    window.nodeRequire = require;
-    window.nodeExports = window.exports;
-    window.nodeModule = module;
-    delete window.require;
-    delete window.exports;
-    delete window.module;
+      window.nodeRequire = require;
+      window.nodeExports = window.exports;
+      window.nodeModule = module;
+      delete window.require;
+      delete window.exports;
+      delete window.module;
   </script>
   <meta charset="utf-8">
   <title>WIT Energy</title>
@@ -42,14 +42,16 @@
         <a class="navbar-brand logo" href="#/dashboard"><i class="fa fa-globe"></i> WIT Energy</a>
       </div>
 
-      <div class="collapse navbar-collapse" id="js-navbar-collapse">
+      <div ng-controller="NavbarCtrl" class="collapse navbar-collapse" id="js-navbar-collapse">
 
-        <ul ng-controller="NavbarCtrl" class="nav navbar-nav">
+        <ul class="nav navbar-nav">
           <li ng-class="{ active: isActiveRoute('dashboard') }"><a href="#/main"><i class="fa fa-bar-chart"></i> Dashboard</a></li>
           <li ng-class="{ active: isActiveRoute('map') }"><a href="#/witenergymap"><i class="fa fa-map-marker"></i> Map</a></li>
           <li ng-class="{ active: isActiveRoute('settings') }"><a href="#/settings"><i class="fa fa-cogs"></i> Settings</a></li>
           <li ng-class="{ active: isActiveRoute('admin') }"><a href="#/admin"><i class="fa fa-users"></i> Administration</a></li>
         </ul>
+        <p ng-if="isLoggedIn()" class="navbar-text navbar-right">Logged in as Joe Levenson</p>
+        <button ng-if="!isLoggedIn()" class="btn btn-default navbar-btn navbar-right"><i class="fa fa-sign-in"></i>&nbsp;Log In</button>
       </div>
     </div>
   </div>
@@ -99,6 +101,7 @@
 <script src="scripts/controllers/settings.js"></script>
 <script src="scripts/controllers/admin.js"></script>
 <script src="scripts/controllers/navbar.js"></script>
+<script src="scripts/directives/fileinput.js"></script>
 <!-- endbuild -->
 
 
