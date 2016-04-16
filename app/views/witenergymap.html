@@ -7,7 +7,7 @@
     </div>
 
     <!--This is the block for the map, which is done with precise px coords, so we zoom it out to scale-->
-  <div style="zoom: 45%">
+  <div style="zoom: 55%">
     <div ng-init="buildingBoxes = []">
       <canvas id="mapCanvas" width="1586" height="975"></canvas>
       <div ng-if="witenergymap.curEnergyData" id="energyMapDiv" class="pull-left">
@@ -49,7 +49,8 @@
           <rect width="100px" height="1000px" fill="url(#grad1)" ></rect>
         </svg>
 
-        <h1 id="meterCenterLabel">{{witenergymap.sqftAvg}}</h1>
+        <h1 id="meterTopLabel">Highest: {{witenergymap.highestEnergy.toFixed(2)}} kwh/sqft</h1>
+        <h1 id="meterBotLabel">Lowest: {{witenergymap.lowestEnergy.toFixed(2)}} kwh/sqft</h1>
       </div>
 
     </div>
@@ -57,9 +58,9 @@
   </div>
 
   <!--TODO: Put the charts here!-->
-  <div class="col-md-4">
+  <!--div class="col-md-4">
     CHARTS GO HERE!
-  </div>
+  </div-->
 </div>
 
 
