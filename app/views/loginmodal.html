@@ -1,0 +1,45 @@
+<div login-modal >
+  <div class="modal-header">
+    {{
+      loginCtrl.mode === 'login'? 'User Log In' :
+      (loginCtrl.mode === 'create' ? 'Create Account' :
+      '')
+    }}
+  </div>
+  <div id="loginModalBody" class="modal-body">
+    <section ng-if="loginCtrl.mode === 'login'">
+      You must log in as an Admin to access this tab...
+      <br>
+      Email <br>
+      <input class="form-control" ng-model="loginCtrl.username">
+
+      Password <br>
+      <input type="password" class="form-control"  ng-model="loginCtrl.pass">
+
+      <a ng-click="loginCtrl.createAccount()">Create account...</a>
+    </section>
+    <section ng-if="loginCtrl.mode === 'create'">
+
+      Email <br>
+      <input class="form-control" ng-model="loginCtrl.createUsername">
+
+      Password <br>
+      <input type="password"
+             class="form-control"  ng-model="loginCtrl.createPass">
+
+      Re-type Password <br>
+      <input type="password"
+             class="form-control"  ng-model="loginCtrl.retypeCreatePass">
+      <a ng-click="loginCtrl.loginMode()">Login existing user...</a>
+    </section>
+    <section ng-if="loginCtrl.mode === 'loading'">
+      <i class="fa fa-circle-o-notch fa-spin fa-4x"></i>
+    </section>
+  </div>
+  <div class="modal-footer">
+    <button ng-if="loginCtrl.mode === 'login'" class="btn btn-primary" ng-click="loginCtrl.logIn(loginCtrl.username, loginCtrl.pass)">Log In</button>
+    <button ng-if="loginCtrl.mode === 'create'" class="btn btn-primary"
+            ng-click="loginCtrl.createUser(loginCtrl.createUsername, loginCtrl.createPass, loginCtrl.retypeCreatePass)">Create</button>
+    <button class="btn btn-danger" ng-click="loginCtrl.cancelLogin()">Cancel</button>
+  </div>
+</div>

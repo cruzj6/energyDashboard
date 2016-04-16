@@ -47,13 +47,7 @@ angular.module('energydashApp')
     function init(cntrl, energyDatabaseService) {
 
       //Initialize the energy data for the scope, after login
-      //TODO: TEST CODE JOEY REMOVE
-      energyDatabaseService.logUserIn("test@tests.com", "test", function(s)
-      {
-        if(s) {
-          updateScopeEnergyData(cntrl, energyDatabaseService);
-        }
-      });
+      updateScopeEnergyData(cntrl, energyDatabaseService);
     }
 
     function updateScopeEnergyData(cntrl, energyDatabaseService)
