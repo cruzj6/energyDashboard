@@ -41,8 +41,24 @@ body {
   transition: all .25s ease-in-out;
 }
 
+.file-name.ng-enter, .file-name.ng-leave {
+  transition: all .25s ease-in-out;
+}
+
+.file-name.ng-leave.ng-leave-active, .file-name.ng-enter {
+  opacity: 0;
+}
+
+.file-name.ng-enter.ng-enter-active, .file-name.ng-leave {
+  opacity: 1;
+}
+
 .file-input-control {
   display: inline-block;
+}
+
+.settings-icon {
+  color: lightgrey;
 }
 
 .btn-primary {
