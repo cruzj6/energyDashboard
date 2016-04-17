@@ -8,26 +8,38 @@
  * Controller of the energydashApp
  */
 angular.module('energydashApp')
-  .controller('MainCtrl', function ($window, Parser, energyDatabaseService) {
+  .controller('MainCtrl', function ($window, $timeout, chartSettings, Parser, energyDatabaseService) {
 
     var vm = this,
-        processEvents = nodeRequire('electron').ipcRenderer;
+        processEvents = nodeRequire('electron').ipcRenderer,
+        isBeingResized = false;
 
+    // Get data from server
     energyDatabaseService.getDataByPath('perBuilding').then(function (data) {
-      vm.donutData = Parser.charts.donut(data, 'total');
+      // Load chart data
+      vm.donutData = Parser.charts.donut(data, chartSettings.load().dataBy);
       vm.lineData = Parser.charts.line(data);
     }, function () {
       var cachedData = JSON.parse($window.localStorage.getItem(('lastSaved')));
-      vm.donutData = Parser.charts.donut(cachedData, 'total');
+      vm.donutData = Parser.charts.donut(cachedData, chartSettings.load().dataBy);
       vm.lineData = Parser.charts.line(cachedData);
     });
 
     // Redraw graphs when window is resized
     processEvents.on('resized', function () {
-      vm.lineApi.update();
-      vm.donutApi.update();
+      if (!isBeingResized) {
+        isBeingResized = true;
+        console.log('redrawing');
+        vm.lineApi.update();
+        vm.donutApi.update();
+        // When resizing is finished
+        $timeout(function () {
+          isBeingResized = false;
+        }, 100);
+      }
     });
 
+    // Donut chart settings
     vm.donutOptions = {
       chart: {
         type: 'pieChart',
@@ -56,18 +68,13 @@ angular.module('energydashApp')
       }
     };
 
+    // Area line chart settings
     vm.lineOptions = {
       chart: {
         type: 'stackedAreaChart',
         height: 500,
         showLabels: false,
         showLegend: false,
-        //margin : {
-        //  top: -30,
-        //  right: -30,
-        //  bottom: -30,
-        //  left: -30
-        //},
         x: function (d) {
           return d[0];
         },

@@ -13,14 +13,14 @@
     <i class="settings-icon fa fa-area-chart fa-5x pull-left fa-fw"></i><h4>Graph Settings</h4>
     <div class="input-group">
       <h5>Donut Chart</h5>
-      <label class="radio-inline"><input type="radio" ng-model="settings.graphSettings.donut" value="maximum">Maximums</label>
-      <label class="radio-inline"><input type="radio" ng-model="settings.graphSettings.donut" value="minimum">Minimums</label>
-      <label class="radio-inline"><input type="radio" ng-model="settings.graphSettings.donut" value="average">Averages</label>
-      <label class="radio-inline"><input type="radio" ng-model="settings.graphSettings.donut" value="total">Totals</label>
+      <label class="radio-inline"><input type="radio" ng-change="settings.saveChartSettings()" ng-model="settings.graphSettings.donut" value="maximum">Maximums</label>
+      <label class="radio-inline"><input type="radio" ng-change="settings.saveChartSettings()" ng-model="settings.graphSettings.donut" value="minimum">Minimums</label>
+      <label class="radio-inline"><input type="radio" ng-change="settings.saveChartSettings()" ng-model="settings.graphSettings.donut" value="average">Averages</label>
+      <label class="radio-inline"><input type="radio" ng-change="settings.saveChartSettings()" ng-model="settings.graphSettings.donut" value="total">Totals</label>
     </div>
     <br />
     <hr />
-    <i class="settings-icon fa fa-users fa-5x pull-left fa-fw"></i><h4>User Administration</h4>
-    <p>Adjust users here</p>
+    <i class="settings-icon fa fa-users fa-5x pull-left fa-fw"></i><h4>Registered Users</h4>
+      <p ng-repeat="user in settings.users"><a ng-href="mailto:{{ user }}?Subject=WIT%20Energy%20Dashboard"><i class="fa fa-envelope"></i></a>&nbsp; {{ user }}</p>
   </div>
 </div>

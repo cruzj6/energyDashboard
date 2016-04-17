@@ -30,6 +30,7 @@ angular.module('energydashApp')
             }
             else {
               //On success
+              fbRef.child('users').child(usrData.uid).set({ email: email });
               console.log(email + " added to database with UserId: " + usrData.uid);
               isSuccess = true;
             }
