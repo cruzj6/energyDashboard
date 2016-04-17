@@ -109,8 +109,8 @@ angular.module('energydashApp')
               i = 0,
               deferredArr = [];
 
+          // Set node data for every building
           for (building in data.perBuilding) {
-            deferredArr.push($q.defer());
             deferredArr.push($q.defer());
             fbRef.child('perBuilding').child(building).update({
               total: data.perBuilding[building].total,
@@ -119,14 +119,16 @@ angular.module('energydashApp')
               minimum: data.perBuilding[building].minimum,
               average: data.perBuilding[building].average
             });
-            fbRef.child('perDate').update(data.perDate, function () {
-              //
-            });
+            // Update date data
+            fbRef.child('perDate').update(data.perDate);
+            // Update building data per date
             fbRef.child('perBuilding').child(building).child('dates').update(data.perBuilding[building].dates, function () {
               deferredArr[i].resolve(true);
               i += 1;
             });
           }
+
+          // Return array of promises
           return $q.all(deferredArr.map(function (deferredObj) {
             return deferredObj.promise;
           }));
