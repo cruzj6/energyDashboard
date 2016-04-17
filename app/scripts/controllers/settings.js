@@ -9,7 +9,7 @@
  */
 angular.module('energydashApp')
   .controller('SettingsCtrl', function ($timeout, $window, Parser, energyDatabaseService) {
-    //var filestream = nodeRequire('fs');
+    var filestream = nodeRequire('fs');
     var vm = this;
 
     vm.removeFile = function () {

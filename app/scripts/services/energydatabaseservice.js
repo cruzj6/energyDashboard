@@ -114,6 +114,7 @@ angular.module('energydashApp')
             deferredArr.push($q.defer());
             fbRef.child('perBuilding').child(building).update({
               total: data.perBuilding[building].total,
+              name: data.perBuilding[building].name,
               maximum: data.perBuilding[building].maximum,
               minimum: data.perBuilding[building].minimum,
               average: data.perBuilding[building].average

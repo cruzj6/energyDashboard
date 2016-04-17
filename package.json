@@ -1,8 +1,9 @@
 {
-  "name": "energydash",
-  "version": "0.0.1",
-  "main": "run.js",
+  "name": "energyDash",
+  "productName": "WITEnergy",
+  "version": "0.1.0",
   "private": true,
+  "main": "run.js",
   "devDependencies": {
     "autoprefixer-core": "^5.2.1",
     "grunt": "^0.4.5",
@@ -36,6 +37,7 @@
     "node": ">=0.10.0"
   },
   "dependencies": {
+    "electron-prebuilt": "^0.37.6",
     "fs": "0.0.2"
   }
 }
