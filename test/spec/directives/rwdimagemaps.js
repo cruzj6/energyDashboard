@@ -15,6 +15,5 @@ describe('Directive: rwdImageMaps', function () {
   it('should make hidden element visible', inject(function ($compile) {
     element = angular.element('<rwd-image-maps></rwd-image-maps>');
     element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the rwdImageMaps directive');
   }));
 });

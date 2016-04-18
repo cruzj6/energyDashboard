@@ -8,7 +8,7 @@
  * Service in the energydashApp.
  */
 angular.module('energydashApp')
-  .service('buildingInfoService', function () {
+  .service('buildingInfoService', function ($window) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var fs = window.nodeRequire("fs");
     var self = this;

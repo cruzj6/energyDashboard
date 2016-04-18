@@ -8,7 +8,7 @@
  * Controller of the energydashApp
  */
 angular.module('energydashApp')
-  .controller('LoginModalCtrl', function ($scope, $rootScope, $uibModal, energyDatabaseService) {
+  .controller('LoginModalCtrl', function ($scope, $rootScope, $uibModal, energyDatabaseService, $q) {
 
     var self = this;
     self.mode = 'login';
@@ -58,15 +58,18 @@ angular.module('energydashApp')
 
     self.createUser = function(user, pass, repass, cd)
     {
+      var defer = $q.defer();
       energyDatabaseService.adminVerify(cd, function(verified) {
         if (verified) {
           if (pass != repass) {
             openWarnModal("Passwords do not match");
             self.mode = 'create';
             self.notMatchPass = true;
+            defer.reject('PasswordsDontMatch');
           }
           else if (!pass || !user || !repass) {
             openWarnModal("Please fill out all fields");
+            defer.reject('Not all fields filled');
           }
           else {
             self.mode = 'loading';
@@ -75,7 +78,10 @@ angular.module('energydashApp')
 
                 //If success log them in
                 energyDatabaseService.logUserIn(user, pass, function (s) {
-                  if (s) $rootScope.$broadcast('login', {});
+                  if (s) {
+                    $rootScope.$broadcast('login', {})
+                    defer.resolve();
+                  }
                 });
               }
               else {
@@ -83,6 +89,8 @@ angular.module('energydashApp')
                 $scope.$apply(function () {
                   self.mode = 'create'
                 });
+
+                defer.reject(err);
               }
             });
           }
@@ -91,6 +99,7 @@ angular.module('energydashApp')
           openWarnModal("Incorrect Secret Code!");
         }
       });
+      return defer.promise;
     };
 
     function openWarnModal(msg)

@@ -15,6 +15,5 @@ describe('Directive: fileInput', function () {
   it('should make hidden element visible', inject(function ($compile) {
     element = angular.element('<file-input></file-input>');
     element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the fileInput directive');
   }));
 });
