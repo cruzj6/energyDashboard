@@ -15,7 +15,7 @@ describe('Controller: MainCtrl', function () {
     //Set up nodeRequire
     window.nodeRequire = window.top.require;
     MainCtrl = $controller('MainCtrl', {
-      $scope: scope,
+      $scope: scope
       // place here mocked dependencies
     });
   }));
