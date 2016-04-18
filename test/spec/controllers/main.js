@@ -6,7 +6,7 @@ describe('Controller: MainCtrl', function () {
   beforeEach(module('energydashApp'));
 
   var MainCtrl,
-    scope;
+    scope, __dirname;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope, $window) {

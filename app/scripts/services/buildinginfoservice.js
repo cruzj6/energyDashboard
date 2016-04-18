@@ -14,9 +14,11 @@ angular.module('energydashApp')
     var self = this;
 
     //Get building data from file
-    var path = __dirname + '/buildingMapData.json';
-    var buildingData = fs.readFileSync(path, 'utf8');
-    self.buildings = JSON.parse(buildingData).buildings;
+    if(__dirname) {
+      var path = __dirname + '/buildingMapData.json';
+      var buildingData = fs.readFileSync(path, 'utf8');
+      self.buildings = JSON.parse(buildingData).buildings;
+    }
 
     return{
       getBuildingInfo: function(){
