@@ -8,7 +8,7 @@
  * Controller of the energydashApp
  */
 angular.module('energydashApp')
-  .controller('NavbarCtrl', function ($scope, $location, energyDatabaseService, $uibModal) {
+  .controller('NavbarCtrl', function ($scope, $location, energyDatabaseService, $uibModal, User) {
     $scope.isActiveRoute = function (route) {
       return new RegExp(route).test($location.path());
     };
@@ -17,6 +17,15 @@ angular.module('energydashApp')
     {
       return energyDatabaseService.getUserSignedIn();
     };
+
+    $scope.$on('login', function(event, args)
+    {
+      var uid = energyDatabaseService.getUserAuthData().uid;
+      energyDatabaseService.getUserEmail(uid, function(data)
+      {
+        $scope.userEmail = data;
+      });
+    });
 
     $scope.logInClick = function()
     {

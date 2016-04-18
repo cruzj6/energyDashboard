@@ -8,7 +8,10 @@
  * Service in the energydashApp.
  */
 angular.module('energydashApp')
-  .service('Parser', function () {
+  .service('Parser', function (buildingInfoService) {
+
+    //Building local info from service
+    self.buildings = buildingInfoService.getBuildingInfo();
 
     function parseSheet(sheet) {
       var i, splitLine,
@@ -32,6 +35,22 @@ angular.module('energydashApp')
         }
       }
       return dataPerBuilding;
+    }
+
+    //Get building names for graph (If possible)
+    function buildNameFromId(id)
+    {
+      for(var i=0; i < self.buildings.length; i++)
+      {
+        var curBuild = self.buildings[i];
+        if(curBuild.id === id)
+        {
+          return curBuild.name;
+        }
+      }
+
+      //We dont have the name
+      return null;
     }
 
     return {
@@ -59,7 +78,9 @@ angular.module('energydashApp')
           var building,
               parsedData = [];
           for (building in data) {
-            parsedData.push({ label: data[building].name, value: data[building][attr.toLowerCase()]});
+            var buildingId = window.btoa(data[building].name);
+            var buildingName = buildNameFromId(buildingId);
+            parsedData.push({ label: buildingName ? buildingName : data[building].name, value: data[building][attr.toLowerCase()]});
           }
           return parsedData;
         },
@@ -67,7 +88,9 @@ angular.module('energydashApp')
           var building, date, series,
               parsedData = [];
           for (building in data) {
-            series = { key: data[building].name, values: [] };
+            var buildingId = window.btoa(data[building].name);
+            var buildingName = buildNameFromId(buildingId);
+            series = { key: buildingName ? buildingName : data[building].name, values: [] };
             for (date in data[building].dates) {
               series.values.push([ new Date(date).getTime(), data[building].dates[date] ]);
             }

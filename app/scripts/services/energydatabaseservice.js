@@ -152,6 +152,28 @@ angular.module('energydashApp')
           {
             return false;
           }
+        },
+
+        adminVerify: function(num, verifyHandler)
+        {
+          this.getDataByPath('authCode').then(function(data)
+          {
+            verifyHandler(Number(num) === Number(data));
+          });
+        },
+
+        getUserEmail: function(uid, handleUserEmail)
+        {
+          if(uid) {
+
+            this.getDataByPath("/users/" + uid).then(function (data)
+            {
+              handleUserEmail(data.email);
+            });
+          }
+          else{
+            handleUserEmail({});
+          }
         }
       }
   });

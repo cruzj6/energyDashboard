@@ -10,18 +10,23 @@
  */
 
 angular.module('energydashApp')
-  .controller('WitenergymapCtrl', function ($scope, energyDatabaseService) {
-    var fs = window.nodeRequire("fs");
+  .controller('WitenergymapCtrl', function ($scope, energyDatabaseService, $uibModal, buildingInfoService) {
+    //var fs = window.nodeRequire("fs");
 
     var self = this;
     self.sqftAvg = 3;
     self.lowestEnergy = 0;
     self.highestEnergy = 0;
+    self.powerPlantEnabled = false;
+    self.loading = false;
 
     //Get building data from file
-    var path = __dirname + '/buildingMapData.json';
-    var buildingData = fs.readFileSync(path, 'utf8');
-    self.buildings = JSON.parse(buildingData).buildings;
+    //var path = __dirname + '/buildingMapData.json';
+    //var buildingData = fs.readFileSync(path, 'utf8');
+   // self.buildings = JSON.parse(buildingData).buildings;
+
+    //Get building info from service
+    self.buildings = buildingInfoService.getBuildingInfo();
 
     //Click on building image map area
     self.buildingClick = function(event, name)
@@ -31,16 +36,12 @@ angular.module('energydashApp')
     };
 
     //When the curEnergyData is changed we need to change everything
-    $scope.$watch(function(){return self.curEnergyData}, function(val)
-    {
-      if(self.curEnergyData) {
-        //Update buildings data to current latest
-        updateLatestForBuildings(self);
+    $scope.$watch(function(){return self.curEnergyData}, function(v){refreshBuildingAndMap(v)});
 
-        //Re-draw the map
-        drawMap(self);
-      }
-    });
+    self.powerPlantCheck = function(isEnabled){
+      //ReDraw the map
+      refreshBuildingAndMap({});
+    };
 
     //Initialize the controller
     init(self, energyDatabaseService);
@@ -48,6 +49,19 @@ angular.module('energydashApp')
 
       //Initialize the energy data for the scope, after login
       updateScopeEnergyData(cntrl, energyDatabaseService);
+    }
+
+    function refreshBuildingAndMap(v)
+    {
+      self.loading = true;
+        if(self.curEnergyData) {
+          //Update buildings data to current latest
+          updateLatestForBuildings(self);
+
+          //Re-draw the map
+          drawMap(self);
+        }
+      self.loading = false;
     }
 
     function updateScopeEnergyData(cntrl, energyDatabaseService)
@@ -81,6 +95,7 @@ angular.module('energydashApp')
       {
         var curBuild = cntrl.buildings[i];
 
+        //Check if it is power plant and if power plant is enabled
         //0 will be most recent
         for(var j=0; j< cntrl.curEnergyData.length; j++)
         {
@@ -89,6 +104,7 @@ angular.module('energydashApp')
             curBuild.energyUse = cntrl.curEnergyData[j].val;
           }
         }
+
       }
 
       //Get new energy minimum and maximum
@@ -97,13 +113,13 @@ angular.module('energydashApp')
       self.highestEnergy = minMax.max;
     }
 
-    function drawCanvasImage()
+    function drawCanvasImage(mapCanvas)
     {
-      var mapCanvas = document.getElementById('mapCanvas');
+      /*var mapCanvas = document.getElementById('mapCanvas');
 
       //Scale the canvas to it's parent
       mapCanvas.style.width="100%";
-      mapCanvas.style.height="100%";
+      mapCanvas.style.height="100%";*/
 
       var mapImgLink = mapCanvas.toDataURL();
       var mapImg = document.getElementById('mapImage');
@@ -114,11 +130,17 @@ angular.module('energydashApp')
 
     function drawMap(cntrl)
     {
-      var mapCanvas = document.getElementById('mapCanvas');
-      mapCanvas.style.display = '';
+      //var mapCanvas = document.getElementById('mapCanvas');
+      //mapCanvas.style.display = '';
 
       //Canvas we will draw the map on
-      var stage = new createjs.Stage("mapCanvas");
+      //var stage = new createjs.Stage("mapCanvas");
+
+      var canvas = document.createElement('canvas');
+      canvas.id = 'mapCanvas';
+      canvas.width="1586";
+      canvas.height="975";
+      var stage = new createjs.Stage(canvas);
 
       //Create map bitmap
       var map = new Image();
@@ -129,7 +151,7 @@ angular.module('energydashApp')
       //Once it is done loading, update the canvas
       bitmap.image.onload = function() {
         stage.update();
-        drawCanvasImage();
+        drawCanvasImage(canvas);
       };
 
       //Assign buildings object
@@ -249,14 +271,16 @@ angular.module('energydashApp')
       for(var i=0; i < buildingsData.length; i++)
       {
         var curBuild = buildingsData[i];
-        var curBuildPerSqft = curBuild.energyUse/curBuild.sqft;
-        if(curBuildPerSqft > minMax.max)
-        {
-          minMax.max = curBuildPerSqft;
-        }
-        if(curBuild.energyUse < minMax.min)
-        {
-          minMax.min = curBuildPerSqft;
+
+        //See if we are including power plant on scale
+        if(curBuild.id != 'QjAxIC0gRSBNZXRlciA1MTA4MTQ5ICg3LjIp' || self.powerPlantEnabled) {
+          var curBuildPerSqft = curBuild.energyUse / curBuild.sqft;
+          if (curBuildPerSqft > minMax.max) {
+            minMax.max = curBuildPerSqft;
+          }
+          if (curBuild.energyUse < minMax.min) {
+            minMax.min = curBuildPerSqft;
+          }
         }
       }
 

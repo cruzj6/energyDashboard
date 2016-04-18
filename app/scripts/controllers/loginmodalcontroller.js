@@ -20,7 +20,12 @@ angular.module('energydashApp')
         energyDatabaseService.logUserIn(user, pass, function (success) {
           //If the login is a success
           if (success) $rootScope.$broadcast('login', {});
-          else openWarnModal("Incorrect Email or Password");
+          else {
+            $scope.$apply(function () {
+              self.mode = 'login'
+            });
+            openWarnModal("Incorrect Email or Password");
+          }
         });
       }
       else{//If the user has not entered both username and password
@@ -51,36 +56,41 @@ angular.module('energydashApp')
       self.mode = 'login';
     };
 
-    self.createUser = function(user, pass, repass)
+    self.createUser = function(user, pass, repass, cd)
     {
-      if(pass != repass)
-      {
-        openWarnModal("Passwords do not match");
-        self.mode = 'create';
-        self.notMatchPass = true;
-      }
-      else if(!pass || !user || !repass)
-      {
-        openWarnModal("Please fill out all fields");
-      }
-      else{
-        self.mode = 'loading';
-        energyDatabaseService.addUser(user, pass, function(success, err)
-        {
-          if(success)
-          {
-            //If success log them in
-            energyDatabaseService.logUserIn(user, pass, function(s)
-            {
-              if(s) $rootScope.$broadcast('login', {});
+      energyDatabaseService.adminVerify(cd, function(verified) {
+        if (verified) {
+          if (pass != repass) {
+            openWarnModal("Passwords do not match");
+            self.mode = 'create';
+            self.notMatchPass = true;
+          }
+          else if (!pass || !user || !repass) {
+            openWarnModal("Please fill out all fields");
+          }
+          else {
+            self.mode = 'loading';
+            energyDatabaseService.addUser(user, pass, function (success, err) {
+              if (success) {
+
+                //If success log them in
+                energyDatabaseService.logUserIn(user, pass, function (s) {
+                  if (s) $rootScope.$broadcast('login', {});
+                });
+              }
+              else {
+                if (err) openWarnModal(err);
+                $scope.$apply(function () {
+                  self.mode = 'create'
+                });
+              }
             });
           }
-          else{
-            if(err) openWarnModal(err);
-            $scope.$apply(function() {self.mode = 'create'});
-          }
-        });
-      }
+        }
+        else {
+          openWarnModal("Incorrect Secret Code!");
+        }
+      });
     };
 
     function openWarnModal(msg)
