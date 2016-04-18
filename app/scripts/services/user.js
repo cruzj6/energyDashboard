@@ -8,21 +8,21 @@
  * Service in the energydashApp.
  */
 angular.module('energydashApp')
-  .service('User', function () {
+  .service('User', function ($rootScope, energyDatabaseService) {
 
-    var firstName,
-        lastName;
-
-    // Hardcoded for now
-    firstName = 'Bob';
-    lastName = 'Johnson';
+    var email;
+    $rootScope.$on('login', function(event, args)
+    {
+      var uid = energyDatabaseService.getUserAuthData().uid;
+      energyDatabaseService.getUserEmail(uid, function(data)
+      {
+        email = data;
+      });
+    });
 
     return {
-      getFirstName: function () {
-        return firstName;
-      },
-      getLastName: function () {
-        return lastName;
+      getEmail: function () {
+        return email;
       }
     };
 

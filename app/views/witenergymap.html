@@ -1,16 +1,23 @@
 <div class="row">
   <div class="col-md-8">
 
-    <!--TODO: Loading wheel for when there is no energy data-->
-    <div ng-if="!witenergymap.curEnergyData">
-      <i class="fa fa-spinner fa-4x" aria-hidden="true"></i>
+    <!--Loading wheel for when there is no energy data-->
+    <div id="mapLoadingDiv" ng-if="!witenergymap.curEnergyData">
+      <i class="fa fa-spinner fa-spin fa-4x" aria-hidden="true"></i>
+    </div>
+
+    <!--Panel with map options-->
+    <div class="panel panel-primary" id="mapOptionsBox">
+      <input type="checkbox" style="margin-left: 5px;" ng-model="witenergymap.powerPlantEnabled"
+             ng-click="witenergymap.powerPlantCheck(witenergymap.powerPlantEnabled)" >
+        Include Power Plant In Gradient
     </div>
 
     <!--This is the block for the map, which is done with precise px coords, so we zoom it out to scale-->
   <div style="zoom: 55%">
     <div ng-init="buildingBoxes = []">
-      <canvas id="mapCanvas" width="1586" height="975"></canvas>
-      <div ng-if="witenergymap.curEnergyData" id="energyMapDiv" class="pull-left">
+      <!--canvas id="mapCanvas" width="1586" height="975"></canvas-->
+      <div ng-if="witenergymap.curEnergyData && !witenergymap.loading" id="energyMapDiv" class="pull-left">
         <img src="" class="rwdimgmap" id="mapImage"
              usemap="#campusImgMap" alt="campMap">
         <map id="campusImgMap" name="campusImgMap">

@@ -30,16 +30,21 @@
       Re-type Password <br>
       <input type="password"
              class="form-control"  ng-model="loginCtrl.retypeCreatePass">
+
+      Secret Code <br>
+      <input type="password"
+             class="form-control"  ng-model="loginCtrl.secretCode">
+
       <a ng-click="loginCtrl.loginMode()">Login existing user...</a>
     </section>
-    <section ng-if="loginCtrl.mode === 'loading'">
+    <section style="text-align: center;" ng-if="loginCtrl.mode === 'loading'">
       <i class="fa fa-circle-o-notch fa-spin fa-4x"></i>
     </section>
   </div>
   <div class="modal-footer">
     <button ng-if="loginCtrl.mode === 'login'" class="btn btn-primary" ng-click="loginCtrl.logIn(loginCtrl.username, loginCtrl.pass)">Log In</button>
     <button ng-if="loginCtrl.mode === 'create'" class="btn btn-primary"
-            ng-click="loginCtrl.createUser(loginCtrl.createUsername, loginCtrl.createPass, loginCtrl.retypeCreatePass)">Create</button>
+            ng-click="loginCtrl.createUser(loginCtrl.createUsername, loginCtrl.createPass, loginCtrl.retypeCreatePass, loginCtrl.secretCode)">Create</button>
     <button class="btn btn-danger" ng-click="loginCtrl.cancelLogin()">Cancel</button>
   </div>
 </div>
